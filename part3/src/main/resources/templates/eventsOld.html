@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>IBM Party 2023</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+    <!--    <link th:href="@{/css/styles.css}" rel="stylesheet">-->
+
+</head>
+<body class="container">
+<h1 class="py-5">IBM Party 2023</h1>
+<form class="col card p-3 mb-5" method="post" th:action="@{/ibm/}" th:object="${partyEvent}">
+    <div class="form-group">
+        <label for="peopleCount">Count</label>
+        <input class="form-control" id="peopleCount" placeholder="Enter people count" required
+               th:field="*{peopleCount}"
+               type="number"/>
+    </div>
+    <div class="form-group">
+        <label for="place">Place</label>
+        <input class="form-control" id="place" placeholder="Place" required
+               th:field="*{place}"
+               type="text"/>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Create Event">
+</form>
+
+
+<form class="col card p-3 mb-5" method="post" th:action="@{/ibm/findPlace}">
+    <div class="form-group">
+        <label for="place">Name</label>
+        <input type="text" th:value="${place}" name="place"/>
+        <input class="btn btn-primary" type="submit">
+    </div>
+</form>
+
+<span th:text="${partiesInPlace}"></span>
+
+
+
+<!--<table class="table table-striped table-bordered">-->
+<!--    <tr>-->
+<!--        <th>Name</th>-->
+<!--        <th>Action</th>-->
+<!--    </tr>-->
+<!--    <tr th:if="${#lists.isEmpty(partiesFromUser)}">-->
+<!--        <td colspan="5">No Records found. Add some...!</td>-->
+<!--    </tr>-->
+<!--    <tr th:each="party : ${partiesFromUser}">-->
+<!--        <td th:text="${party.userName}"></td>-->
+<!--        <td th:text="${party.place}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(parties)}">
+        <td colspan="5">No Records found. Add some...!</td>
+    </tr>
+    <tr th:each="party : ${parties}">
+        <td th:text="${party.peopleCount}"></td>
+        <td th:text="${party.place}"></td>
+    </tr>
+</table>
+</body>
+</html>
